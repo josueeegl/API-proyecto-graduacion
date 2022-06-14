@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const db =
+  process.env.MONGO_URI ||
   "mongodb+srv://yourfinzMaster:Test12345.@cluster0.gkhwwl0.mongodb.net/yourFinz-db?retryWrites=true&w=majority";
 
 mongoose.connect(db, {

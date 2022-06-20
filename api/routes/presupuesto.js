@@ -21,7 +21,7 @@ router.post("/presupuesto", isAuthenticated, (req, res) => {
   Presu.create({ ...req.body, user_id: _id }).then((x) =>
     res.status(201).send(x)
   );
-});
+}); 
 
 router.put("/presupuesto:id", isAuthenticated, (req, res) => {
   Presu.findOneAndUpdate(req.params.id, req.body).then(() =>

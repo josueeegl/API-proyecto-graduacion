@@ -10,7 +10,8 @@ const corsOptions = {
   optionSuccessStatus: 200,
 };
 app.use(cors(corsOptions));
-require("./api/connection/mongoose");
+
+
 app.use(
   bodyParser.urlencoded({
     extended: true,
@@ -18,5 +19,6 @@ app.use(
 );
 
 app.use(require("./api/routes/presupuesto"));
+app.use(require("./api/routes/users"));
 
 app.listen(puerto, () => console.log("Escuchando en el puerto " + puerto));

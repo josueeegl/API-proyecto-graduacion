@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Presu = require("../models/presupuesto");
-const isAuthenticated = require("../auth/index");
+const { isAuthenticated, hasRole } = require("../auth/index");
 require("../connection/mongoose");
 
 router.get("/presupuesto", (req, res) => {

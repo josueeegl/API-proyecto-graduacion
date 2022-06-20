@@ -4,6 +4,7 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 const Users = require("../models/users");
 require("../connection/mongoose");
+const { isAuthenticated } = require("../auth/index");
 
 const signToken = (_id) => {
   return jwt.sign({ _id }, "mi-secreto", {
@@ -55,4 +56,7 @@ router.post("/user/login", (req, res) => {
     });
 });
 
+router.get("/me", isAuthenticated, (req, res) => {
+  res.send(req.user);
+});
 module.exports = router;

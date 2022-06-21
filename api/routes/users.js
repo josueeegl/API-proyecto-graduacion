@@ -13,7 +13,7 @@ const signToken = (_id) => {
 };
 
 router.post("/user/register", (req, res) => {
-  const { email, password } = req.body;
+  const { nombre, email, password } = req.body;
   crypto.randomBytes(16, (err, salt) => {
     const newSalt = salt.toString("base64"); //convierte el salt en un string largo
     //encriptamos la contraseña
@@ -26,6 +26,7 @@ router.post("/user/register", (req, res) => {
             return res.send("Usuario ya registrado");
           }
           Users.create({
+            nombre,
             email,
             password: encryptedPassword,
             salt: newSalt,

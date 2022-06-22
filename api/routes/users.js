@@ -16,6 +16,7 @@ router.post("/user/register", (req, res) => {
   const { nombre, email, password } = req.query;
   crypto.randomBytes(16, (err, salt) => {
     const newSalt = salt.toString("base64"); //convierte el salt en un string largo
+
     //encriptamos la contraseña
     crypto.pbkdf2(password, newSalt, 10000, 64, "sha1", (err, key) => {
       const encryptedPassword = key.toString("base64");

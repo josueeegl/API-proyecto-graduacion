@@ -5,9 +5,13 @@ const { isAuthenticated, hasRole } = require("../auth/index");
 require("../connection/mongoose");
 
 router.get("/presupuesto", (req, res) => {
+  console.log("hola");
   Presu.find()
     .exec()
-    .then((x) => res.status(200).send(x));
+    .then((x) => {
+      console.log(x);
+      res.status(200).send(x);
+    });
 });
 
 router.get("/presupuesto:id", (req, res) => {
@@ -21,7 +25,7 @@ router.post("/presupuesto", isAuthenticated, (req, res) => {
   Presu.create({ ...req.body, usuario_id: _id }).then((x) =>
     res.status(201).send(x)
   );
-}); 
+});
 
 router.put("/presupuesto:id", isAuthenticated, (req, res) => {
   Presu.findOneAndUpdate(req.params.id, req.body).then(() =>

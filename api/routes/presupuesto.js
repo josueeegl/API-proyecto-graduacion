@@ -18,7 +18,7 @@ router.get("/presupuesto:id", (req, res) => {
 
 router.post("/presupuesto", isAuthenticated, (req, res) => {
   const { _id } = req.user;
-  Presu.create({ ...req.body, user_id: _id }).then((x) =>
+  Presu.create({ ...req.body, usuario_id: _id }).then((x) =>
     res.status(201).send(x)
   );
 }); 

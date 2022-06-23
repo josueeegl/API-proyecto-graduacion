@@ -2,11 +2,11 @@ const mongoose = require("mongoose");
 const schema = mongoose.Schema();
 
 const Presupuestos = new mongoose.Schema({
-  usuario_id: String,
-  nombre: String,
+  usuario_id: { type: String, required: true },
+  nombre: { type: String, required: true },
   descrip: String,
-  Monto_inicial: Number,
-  fecha_inicial: Date,
+  Monto_inicial: { type: Number, required: true },
+  fecha_inicial: { type: Date, default: new Date(Date.now) },
 });
 
 module.exports = mongoose.model("Presupuesto", Presupuestos);

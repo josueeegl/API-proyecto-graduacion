@@ -31,7 +31,12 @@ module.exports = {
             r[fecha].push(a);
             return r;
           }, Object.create(null));
-          return res.status(200).send(result);
+
+          var array = [];
+          for (const property in result) {
+            array.push({ title: property, data: result[property] });
+          }
+          return res.status(200).send(array);
         }
 
         res.status(200).send(x);

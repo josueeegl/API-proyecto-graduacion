@@ -32,9 +32,18 @@ module.exports = {
             return r;
           }, Object.create(null));
 
+          var ing = 0.0,
+            gas = 0.0;
+          for (const pro in result) {
+            result[pro].forEach((item) => {
+              item.tipo === "gasto" ? (gas += item.valor) : (ing += item.valor);
+            });
+          }
+          var balance = ing - gas;
+          
           var array = [];
           for (const property in result) {
-            array.push({ title: property, data: result[property] });
+            array.push({ title: property, data: result[property], tIngresos: ing, tGastos: gas, balance: balance });
           }
           return res.status(200).send(array);
         }

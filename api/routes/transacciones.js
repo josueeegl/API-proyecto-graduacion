@@ -9,7 +9,7 @@ const {
   getTransacciones,
 } = require("../controllers/Transacciones");
 
-router.get("/transacciones:id_presupuesto", isAuthenticated, getTransacciones);
+router.get("/transacciones:id_presupuesto", getTransacciones);
 
 router.get("/transacciones:id", isAuthenticated, (req, res) => {
   Transacciones.findById(req.params.id)

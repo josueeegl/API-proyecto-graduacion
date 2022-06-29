@@ -2,6 +2,7 @@ const express = require("express"),
   app = express(),
   puerto = process.env.PORT || 3000,
   cors = require("cors"),
+  fileUpload = require("express-fileupload"),
   bodyParser = require("body-parser");
 
 const corsOptions = {
@@ -19,6 +20,7 @@ app.use(
 );
 
 app.use(require("./api/routes/presupuesto"));
+app.use(require("./api/routes/transacciones"));
 app.use(require("./api/routes/users"));
 
 app.listen(puerto, () => console.log("Escuchando en el puerto " + puerto));

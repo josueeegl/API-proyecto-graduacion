@@ -4,12 +4,11 @@ const Presu = require("../models/presupuesto");
 const { isAuthenticated, hasRole } = require("../auth/index");
 require("../connection/mongoose");
 
-router.get("/presupuesto", (req, res) => {
-  console.log("hola");
-  Presu.find()
+router.get("/presupuesto", isAuthenticated, (req, res) => {
+  const { _id } = req.user;
+  Presu.find({ usuario_id: _id })
     .exec()
     .then((x) => {
-      console.log(x);
       res.status(200).send(x);
     });
 });
@@ -28,12 +27,14 @@ router.post("/presupuesto", isAuthenticated, (req, res) => {
 });
 
 router.put("/presupuesto:id", isAuthenticated, (req, res) => {
+  
   Presu.findOneAndUpdate(req.params.id, req.body).then(() =>
     res.sendStatus(204)
   );
 });
 
 router.delete("/presupuesto:id", isAuthenticated, (req, res) => {
+  console.log(req.params.id);
   Presu.findOneAndDelete(req.params.id)
     .exec()
     .then(() => res.sendStatus(204));

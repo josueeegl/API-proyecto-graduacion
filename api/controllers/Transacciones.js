@@ -18,7 +18,7 @@ module.exports = {
   },
 
   getTransacciones: (req, res) => {
-    Transacciones.find({ presupuesto_id: req.body._id })
+    Transacciones.find({ presupuesto_id: req.params.id_presupuesto })
       .exec()
       .then((x) => {
         if (x.length > 0) {

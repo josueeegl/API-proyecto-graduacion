@@ -40,10 +40,10 @@ module.exports = {
             });
           }
           var balance = ing - gas;
-          
-          var array = [];
+
+          var array = [ing, gas, balance];
           for (const property in result) {
-            array.push({ title: property, data: result[property], tIngresos: ing, tGastos: gas, balance: balance });
+            array.push({ title: property, data: result[property] });
           }
           return res.status(200).send(array);
         }

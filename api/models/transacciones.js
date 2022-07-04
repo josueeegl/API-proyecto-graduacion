@@ -11,8 +11,9 @@ const Transacciones = new mongoose.Schema(
     nombre: { type: String, required: true, trim: true },
     descrip: { type: String, trim: true },
     valor: { type: Number, required: true },
-    tipo: { type: String, required: true, trim: true },
+    tipo: { type: String, trim: true },
     tipo_pago: { type: String, default: "Efectivo", trim: true },
+    fecha: { type: Date, default: new Date() },
     imagen: {
       public_id: String,
       secure_url: {

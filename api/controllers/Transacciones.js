@@ -14,7 +14,9 @@ module.exports = {
       };
       await fs.unlink(req.files.imagen.tempFilePath);
     }
-    Transacciones.create(req.body).then((x) => res.status(201).send(x));
+    Transacciones.create(req.body).then((x) => {
+      res.status(201).send(x)
+    });
   },
 
   getTransacciones: (req, res) => {
@@ -23,7 +25,7 @@ module.exports = {
       .then((x) => {
         if (x.length > 0) {
           const result = x.reduce(function (r, a) {
-            const fechayhora = a.createdAt.toString().split(" ").splice(0, 4);
+            const fechayhora = a.fecha.toString().split(" ").splice(0, 4);
             const fecha = `${formatear(fechayhora[0])} ${
               fechayhora[2]
             }, ${formatearYear(fechayhora[1])} ${fechayhora[3]}`;
@@ -36,12 +38,12 @@ module.exports = {
             gas = 0.0;
           for (const pro in result) {
             result[pro].forEach((item) => {
-              item.tipo === "gasto" ? (gas += item.valor) : (ing += item.valor);
+              item.tipo === "Gasto" ? (gas += item.valor) : (ing += item.valor);
             });
           }
           var balance = ing - gas;
 
-          var array = [ing, gas, balance];
+          var array = [ing, gas, balance.toFixed(2)];
           for (const property in result) {
             array.push({ title: property, data: result[property] });
           }

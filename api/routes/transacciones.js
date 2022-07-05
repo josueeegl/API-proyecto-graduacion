@@ -28,15 +28,15 @@ router.post(
 );
 
 router.put("/transacciones:id", isAuthenticated, (req, res) => {
-  Transacciones.findOneAndUpdate(req.params.id, req.body).then(() =>
+  Transacciones.findOneAndUpdate({ _id: req.params.id }, req.body).then(() =>
     res.sendStatus(204)
   );
 });
 
 router.delete("/transacciones:id", isAuthenticated, (req, res) => {
-  Transacciones.findOneAndDelete(req.params.id)
+  Transacciones.findOneAndDelete({ _id: req.params.id })
     .exec()
-    .then(() => res.sendStatus(204));
+    .then((x) => res.sendStatus(204));
 });
 
 module.exports = router;

@@ -27,15 +27,14 @@ router.post("/presupuesto", isAuthenticated, (req, res) => {
 });
 
 router.put("/presupuesto:id", isAuthenticated, (req, res) => {
-  
-  Presu.findOneAndUpdate(req.params.id, req.body).then(() =>
+  Presu.findOneAndUpdate({ _id: req.params.id }, req.body).then(() =>
     res.sendStatus(204)
   );
 });
 
 router.delete("/presupuesto:id", isAuthenticated, (req, res) => {
   console.log(req.params.id);
-  Presu.findOneAndDelete(req.params.id)
+  Presu.findOneAndDelete({ _id: req.params.id })
     .exec()
     .then(() => res.sendStatus(204));
 });

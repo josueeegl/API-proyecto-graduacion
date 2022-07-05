@@ -4,8 +4,7 @@ const schema = mongoose.Schema();
 const Transacciones = new mongoose.Schema(
   {
     presupuesto_id: {
-      type: mongoose.Types.ObjectId,
-      ref: "Presupuesto",
+      type: String,
       required: true,
     },
     nombre: { type: String, required: true, trim: true },

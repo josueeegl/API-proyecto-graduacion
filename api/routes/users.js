@@ -61,4 +61,20 @@ router.post("/user/login", (req, res) => {
 router.get("/me", isAuthenticated, (req, res) => {
   res.send(req.user);
 });
+
+router.get("/user:email", isAuthenticated, (req, res) => {
+  Users.find({ email: req.params.email })
+    .exec()
+    .then((x) => res.status(200).send(x));
+});
+
+router.delete("/user:id", isAuthenticated, (req, res) => {
+  console.log(req.params.id);
+  Users.findOneAndDelete({ _id: req.params.id })
+    .exec()
+    .then(() => res.sendStatus(204));
+});
+
+
+
 module.exports = router;

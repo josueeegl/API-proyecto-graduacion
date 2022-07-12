@@ -7,9 +7,13 @@ require("../connection/mongoose");
 const {
   postTransaccion,
   getTransacciones,
+  getTransaccionesResumen, getTransaccionesDetalle
 } = require("../controllers/Transacciones");
 
 router.get("/transacciones:id_presupuesto", getTransacciones);
+
+router.get("/transacciones/resumen", isAuthenticated, getTransaccionesResumen);
+router.get("/transacciones/detalle", isAuthenticated, getTransaccionesDetalle);
 
 router.get("/transacciones:id", isAuthenticated, (req, res) => {
   Transacciones.findById(req.params.id)

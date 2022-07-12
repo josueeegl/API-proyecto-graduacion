@@ -75,6 +75,25 @@ router.delete("/user:id", isAuthenticated, (req, res) => {
     .then(() => res.sendStatus(204));
 });
 
-
+router.put("/user", (req, res) => {
+  const { id, password } = req.query;
+  Users.findOne({ _id: id })
+    .exec()
+    .then((user) => {
+      if (!user) {
+        return res.send("Usuario y/o contraseña incorrecta");
+      }
+      crypto.pbkdf2(password, user.salt, 10000, 64, "sha1", (err, key) => {
+        const encryptedPassword = key.toString("base64");
+        if (user.password === encryptedPassword) {
+          Users.findOneAndUpdate({ _id: id }, req.body).then(() =>
+            res.sendStatus(204)
+          );
+        } else {
+          res.send(JSON.stringify("Contraseña incorrecta"));
+        }
+      });
+    });
+});
 
 module.exports = router;

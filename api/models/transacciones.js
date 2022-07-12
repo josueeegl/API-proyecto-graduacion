@@ -7,6 +7,10 @@ const Transacciones = new mongoose.Schema(
       type: String,
       required: true,
     },
+    usuario_id: {
+      type: String,
+      required: true,
+    },
     nombre: { type: String, required: true, trim: true },
     descrip: { type: String, trim: true },
     valor: { type: Number, required: true },

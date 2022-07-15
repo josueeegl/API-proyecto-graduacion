@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Presu = require("../models/presupuesto");
+const Transacciones = require("../models/transacciones");
 const { isAuthenticated, hasRole } = require("../auth/index");
 require("../connection/mongoose");
 
@@ -36,7 +37,16 @@ router.delete("/presupuesto:id", isAuthenticated, (req, res) => {
   console.log(req.params.id);
   Presu.findOneAndDelete({ _id: req.params.id })
     .exec()
-    .then(() => res.sendStatus(204));
+    .then(() => {
+      Transacciones.find({ presupuesto_id: req.params.id })
+        .exec()
+        .then((x) => {
+          x.forEach(async (item) => {
+            await Transacciones.findOneAndDelete({ _id: item._id }).exec();
+          });
+          res.sendStatus(204);
+        });
+    });
 });
 
 module.exports = router;

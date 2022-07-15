@@ -2,6 +2,7 @@ const fs = require("fs-extra");
 const { uploadFiles, deletFiles } = require("../connection/cloudinary");
 const Transacciones = require("../models/transacciones");
 const { formatear, formatearYear } = require("./formatearFecha");
+const { gxIngresos, gxGastos } = require("../functions/graficos");
 require("../connection/mongoose");
 
 module.exports = {
@@ -23,6 +24,7 @@ module.exports = {
 
   getTransacciones: (req, res) => {
     Transacciones.find({ presupuesto_id: req.params.id_presupuesto })
+      .sort({ fecha: -1 })
       .exec()
       .then((x) => {
         if (x.length > 0) {
@@ -70,7 +72,16 @@ module.exports = {
           });
           var balance = ing - gas;
 
-          var array = [ing.toFixed(2), gas.toFixed(2), balance.toFixed(2)];
+          var ingresosG = gxIngresos(x);
+          var gastosG = gxGastos(x);
+          var array = [
+            ing.toFixed(2),
+            gas.toFixed(2),
+            balance.toFixed(2),
+            ingresosG,
+            gastosG,
+          ];
+        
           return res.status(200).send(array);
         }
 

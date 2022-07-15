@@ -81,7 +81,7 @@ module.exports = {
             ingresosG,
             gastosG,
           ];
-        
+
           return res.status(200).send(array);
         }
 

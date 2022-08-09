@@ -23,5 +23,6 @@ app.use(require("./api/routes/presupuesto"));
 app.use(require("./api/routes/transacciones"));
 app.use(require("./api/routes/users"));
 app.use(require("./api/routes/graphics"));
+app.use(require("./api/routes/informacion"));
 
 app.listen(puerto, () => console.log("Escuchando en el puerto " + puerto));

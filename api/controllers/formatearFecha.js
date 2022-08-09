@@ -15,6 +15,7 @@ module.exports = {
     if (año.startsWith("Ap")) return "Abril";
     if (año.startsWith("Jun")) return "Junio";
     if (año.startsWith("Jul")) return "Julio";
+    if (año.startsWith("Au")) return "Agosto";
     if (año.startsWith("Sep")) return "Septiembre";
     if (año.startsWith("Oc")) return "Octubre";
     if (año.startsWith("Nov")) return "Noviembre";

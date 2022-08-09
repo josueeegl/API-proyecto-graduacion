@@ -24,7 +24,7 @@ module.exports = {
             array.push({ title: property, data: [result[property]] });
           }
           const response = await fetch(
-            "http://localhost:3000/transacciones/resumen",
+            "http://localhost:3000/transacciones/resumen", 
             {
               method: "GET",
               headers: {
